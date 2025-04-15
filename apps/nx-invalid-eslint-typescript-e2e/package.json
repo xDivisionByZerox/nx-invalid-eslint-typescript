@@ -1,0 +1,26 @@
+{
+  "name": "@nx-invalid-eslint-typescript/nx-invalid-eslint-typescript-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "name": "nx-invalid-eslint-typescript-e2e",
+    "implicitDependencies": [
+      "nx-invalid-eslint-typescript"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/nx-invalid-eslint-typescript-e2e/jest.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "nx-invalid-eslint-typescript:build"
+        ]
+      }
+    }
+  }
+}
