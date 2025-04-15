@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    name: 'Lint: node-22, ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@4
+        with:
+          fetch-depth: 0
+
+      - name: Set node version to 22
+        uses: actions/setup-node@4
+        with:
+          node-version: 22
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint
+        run: npx nx run-many -t lint --verbose
